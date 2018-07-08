@@ -65,8 +65,8 @@ class UnitTest extends TestCase
     public function testCarInsert()
     {
         $car = new Car();
-        $car->MODEL = "tundra";
-        $car->MAKE = "toyota";
+        $car->MODEL = "Tundra";
+        $car->MAKE = "Toyota";
         $car->YEAR = 2014;
 
         $this->assertTrue($car->save());
@@ -82,8 +82,8 @@ class UnitTest extends TestCase
     public function testCarDelete()
     {
         $car = new Car();
-        $car->MODEL = "tundra";
-        $car->MAKE = "toyota";
+        $car->MODEL = "Tundra";
+        $car->MAKE = "Toyota";
         $car->YEAR = 2014;
         $car->save();
 
@@ -108,5 +108,11 @@ class UnitTest extends TestCase
         $car = App\Car::find(1);
         $car->YEAR = $car->YEAR + 0;
         $this->assertInternalType('integer',$car->YEAR);
+    }
+
+    public function testCarMake()
+    {
+        $car = App\Car::find(1);
+        $this->assertContains($car->MAKE,["Ford","Honda","Toyota"]);
     }
 }
