@@ -40,4 +40,11 @@ class UnitTest extends TestCase
 
         $this->assertTrue($user->delete());
     }
+
+    public function testUserUpdate()
+    {
+        $user = App\User::find(1);
+        $user->name = 'Steve Smith';
+        $this->assertTrue($user->save());
+    }
 }
