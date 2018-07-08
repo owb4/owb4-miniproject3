@@ -4,6 +4,8 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Database\Seeder;
+use App\User;
+use Faker\Generator as Faker;
 
 class UnitTest extends TestCase
 {
@@ -18,21 +20,12 @@ class UnitTest extends TestCase
 
     public function testUserInsert()
     {
-        $user = factory(App\User::class, 1)->create();
+        $user = new User();
+        $user->name = "Oliver";
+        $user->email = str_random(10).'@example.com';
+        $user->password = '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm';
+        $user->remember_token = str_random(10);
 
-        $this->assertDatabaseHas('users', [
-           'name' => 'Ela'
-        ]);
-    }
-
-    public function testUserUpdate()
-    {
-        DB::table('users')
-            ->where('name', 'Ela')
-            ->update(['name' => 'Steve Smith']);
-
-        $this->assertDatabaseHas('users', [
-            'name' => 'Steve Smith'
-        ]);
+        $this->assertTrue($user->save());
     }
 }
