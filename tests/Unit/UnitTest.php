@@ -49,7 +49,7 @@ class UnitTest extends TestCase
         $this->assertTrue($user->save());
     }
 
-    public function testDBSeedCount()
+    public function testUserSeedCount()
     {
         $user = App\User::All();
         $prevUserCount = $user->count();
@@ -88,5 +88,18 @@ class UnitTest extends TestCase
         $car->save();
 
         $this->assertTrue($car->delete());
+    }
+
+    public function testCarSeedCount()
+    {
+        $car = App\Car::All();
+        $prevCarCount = $car->count();
+        factory(App\Car::class, 50)->create()->each(function ($u) {
+            //$u->posts()->save(factory(App\Post::class)->make());
+        });
+        $car = App\Car::All();
+        $newCarCount = $car->count();
+        $diff = $newCarCount - $prevCarCount;
+        $this->assertEquals(50,$diff);
     }
 }
