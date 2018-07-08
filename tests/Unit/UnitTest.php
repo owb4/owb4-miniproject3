@@ -5,6 +5,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Database\Seeder;
 use App\User;
+use App\Car;
 use Faker\Generator as Faker;
 
 class UnitTest extends TestCase
@@ -51,13 +52,22 @@ class UnitTest extends TestCase
     public function testDBSeedCount()
     {
         $user = App\User::All();
-        $prevCount = $user->count();
+        $prevUserCount = $user->count();
         factory(App\User::class, 50)->create()->each(function ($u) {
             //$u->posts()->save(factory(App\Post::class)->make());
         });
         $user = App\User::All();
-        $newCount = $user->count();
-        $diff = $newCount - $prevCount;
+        $newUserCount = $user->count();
+        $diff = $newUserCount - $prevUserCount;
         $this->assertEquals(50,$diff);
+    }
+    public function testCarInsert()
+    {
+        $car = new Car();
+        $car->model = "tundra";
+        $car->make = "toyota";
+        $car->year = "2014";
+
+        $this->assertTrue($car->save());
     }
 }
