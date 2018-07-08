@@ -26,22 +26,26 @@ class FeatureTest extends TestCase
     public function testAbout()
     {
         //create a user to simulate authentication
-        $user = factory(App\User::class)->create();
+        //$user = factory(App\User::class)->create();
 
         //login and access page using user
-        $response = $this->actingAs($user)
-            ->get('/about');
+        //$response = $this->actingAs($user)
+        //    ->get('/about');
+
+        $response = $this->get('/about');
 
         $response->assertStatus(200);
     }
     public function testContact()
     {
         //create a user to simulate authentication
-        $user = factory(App\User::class)->create();
+        //$user = factory(App\User::class)->create();
 
         //login and access page using user
-        $response = $this->actingAs($user)
-            ->get('/contact');
+        //$response = $this->actingAs($user)
+        //    ->get('/contact');
+
+        $response = $this->get('/contact');
 
         $response->assertStatus(200);
     }
