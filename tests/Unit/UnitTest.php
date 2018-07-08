@@ -47,4 +47,17 @@ class UnitTest extends TestCase
         $user->name = 'Steve Smith';
         $this->assertTrue($user->save());
     }
+
+    public function testDBSeedCount()
+    {
+        $user = App\User::All();
+        $prevCount = $user->count();
+        factory(App\User::class, 50)->create()->each(function ($u) {
+            //$u->posts()->save(factory(App\Post::class)->make());
+        });
+        $user = App\User::All();
+        $newCount = $user->count();
+        $diff = $newCount - $prevCount;
+        $this->assertEquals(50,$diff);
+    }
 }
