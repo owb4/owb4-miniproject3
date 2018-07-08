@@ -115,4 +115,10 @@ class UnitTest extends TestCase
         $car = App\Car::find(1);
         $this->assertContains($car->MAKE,["Ford","Honda","Toyota"]);
     }
+
+    public function testCarModel()
+    {
+        $car = App\Car::find(1);
+        $this->assertInternalType('string',$car->MODEL);
+    }
 }
