@@ -61,6 +61,7 @@ class UnitTest extends TestCase
         $diff = $newUserCount - $prevUserCount;
         $this->assertEquals(50,$diff);
     }
+
     public function testCarInsert()
     {
         $car = new Car();
@@ -68,6 +69,13 @@ class UnitTest extends TestCase
         $car->make = "toyota";
         $car->year = "2014";
 
+        $this->assertTrue($car->save());
+    }
+
+    public function testCarUpdate()
+    {
+        $car = App\Car::find(1);
+        $car->year = '2000';
         $this->assertTrue($car->save());
     }
 }
