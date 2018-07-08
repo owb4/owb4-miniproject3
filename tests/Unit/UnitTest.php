@@ -78,4 +78,15 @@ class UnitTest extends TestCase
         $car->year = '2000';
         $this->assertTrue($car->save());
     }
+
+    public function testCarDelete()
+    {
+        $car = new Car();
+        $car->model = "tundra";
+        $car->make = "toyota";
+        $car->year = "2014";
+        $car->save();
+
+        $this->assertTrue($car->delete());
+    }
 }
