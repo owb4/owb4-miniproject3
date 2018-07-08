@@ -34,4 +34,15 @@ class FeatureTest extends TestCase
 
         $response->assertStatus(200);
     }
+    public function testContact()
+    {
+        //create a user to simulate authentication
+        $user = factory(App\User::class)->create();
+
+        //login and access page using user
+        $response = $this->actingAs($user)
+            ->get('/contact');
+
+        $response->assertStatus(200);
+    }
 }
